@@ -1,6 +1,5 @@
-var http = require('http');
+var express = require('express');
 
-module.exports = http.createServer(function(req, res) {
-  res.writeHead(200, {'Content-Type': 'application/json'});
-  res.end(JSON.stringify({ip: req.connection.remoteAddress}));
+var app = module.exports = express.createServer(function(req, res) {
+  res.send({ip: req.connection.remoteAddress});
 });
