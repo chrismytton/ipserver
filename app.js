@@ -33,6 +33,14 @@ var app = module.exports = express.createServer(ipInfo, function(req, res) {
   res.send(req.ipInfo);
 });
 
+app.configure('development', function(){
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
+
+app.configure('production', function(){
+  app.use(express.errorHandler());
+});
+
 app.enable('jsonp callback');
 
 if (!module.parent) {
