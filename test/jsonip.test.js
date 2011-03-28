@@ -22,5 +22,12 @@ module.exports = {
     }, {
       body: '{"ip":"127.0.0.1","domains":["localhost"]}'
     });
+  },
+  'test jsonp with domains': function() {
+    assert.response(jsonip, {
+      url: '/?callback=domaintest&domains=1'
+    }, {
+      body: 'domaintest({"ip":"127.0.0.1","domains":["localhost"]});'
+    });
   }
 }
