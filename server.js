@@ -7,10 +7,9 @@ cluster('app.js')
     .use(cluster.debug())
     .use(cluster.repl(8888))
     .use(cluster.reload())
-    .listen(3000)
   .in('production')
     .set('workers', 4)
     .use(cluster.logger())
     .use(cluster.pidfiles())
-    .use(cluster.cli())
-    .listen('/tmp/jsonip.sock');
+  .in('all')
+    .listen(3000);
