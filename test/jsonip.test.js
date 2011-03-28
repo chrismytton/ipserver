@@ -8,5 +8,12 @@ module.exports = {
     }, {
       body: '{"ip":"127.0.0.1"}'
     });
+  },
+  'test jsonp callback': function() {
+    assert.response(jsonip, {
+      url: '/?callback=test'
+    }, {
+      body: 'test({"ip":"127.0.0.1"});'
+    });
   }
 }
