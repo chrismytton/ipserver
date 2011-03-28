@@ -16,7 +16,9 @@ function ipInfo(req, res, next) {
   if (req.query.domains) {
     // Perform a reverse dns lookup on the ip address
     reverse(ip, function(err, domains) {
-      if (err) throw err;
+      if (err) next(err);
+
+      // Store the returned domains and continue down the stack
       req.ipInfo.domains = domains;
       next();
     });
