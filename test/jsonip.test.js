@@ -15,5 +15,12 @@ module.exports = {
     }, {
       body: 'test({"ip":"127.0.0.1"});'
     });
+  },
+  'test optional domain support': function() {
+    assert.response(jsonip, {
+      url: '/?domains=1'
+    }, {
+      body: '{"ip":"127.0.0.1","domains":["localhost"]}'
+    });
   }
 }
