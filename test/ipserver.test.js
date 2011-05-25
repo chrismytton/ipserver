@@ -41,7 +41,10 @@ module.exports = {
       headers: { Accept: 'text/plain' }
     }, {
       body: '127.0.0.1',
-      headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        Link: '<https://github.com/hecticjeff/ipserver>; rel="help"; title="Source Code on GitHub"'
+      }
     });
   }
 };
