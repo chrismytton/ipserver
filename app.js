@@ -30,7 +30,11 @@ function ipInfo(req, res, next) {
 
 // Create a simple middleware stack
 var app = module.exports = express.createServer(ipInfo, function(req, res) {
-  res.send(req.ipInfo);
+  if (!req.accepts('json')) {
+    res.send(req.ipInfo.ip, {'Content-Type': 'text/plain'});
+  } else {
+    res.send(req.ipInfo);
+  }
 });
 
 app.configure('development', function(){
