@@ -29,7 +29,7 @@ function ipInfo(req, res, next) {
 }
 
 // Create a simple middleware stack
-var app = module.exports = express.createServer(ipInfo, function(req, res) {
+var app = module.exports = express.createServer(ipInfo, express.logger(), function(req, res) {
   res.header('Link', '<https://github.com/hecticjeff/ipserver>; rel="help"; title="Source Code on GitHub"');
   if (!req.accepts('json')) {
     res.send(req.ipInfo.ip, {'Content-Type': 'text/plain'});
