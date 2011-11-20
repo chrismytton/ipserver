@@ -28,15 +28,17 @@ function ipInfo(req, res, next) {
   }
 }
 
-// Create a simple middleware stack
-var app = module.exports = express.createServer(ipInfo, express.logger(), function(req, res) {
+function addLinkHeader(req, res, next) {
   res.header('Link', '<https://github.com/hecticjeff/ipserver>; rel="help"; title="Source Code on GitHub"');
-  if (!req.accepts('json')) {
-    res.send(req.ipInfo.ip, {'Content-Type': 'text/plain'});
-  } else {
-    res.send(req.ipInfo);
-  }
-});
+  next();
+}
+
+// Create a simple middleware stack
+var app = module.exports = express.createServer(
+  ipInfo,
+  express.logger(),
+  addLinkHeader
+);
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
@@ -47,6 +49,15 @@ app.configure('production', function(){
 });
 
 app.enable('jsonp callback');
+
+app.get('/', function(req, res) {
+  res.send(req.ipInfo.ip, {'Content-Type': 'text/plain'});
+});
+
+app.get('/json', function(req, res) {
+  res.send(req.ipInfo);
+});
+
 
 if (!module.parent) {
   app.listen(3000);
