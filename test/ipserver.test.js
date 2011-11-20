@@ -4,7 +4,7 @@ var assert = require('assert'),
 module.exports = {
   'test GET /': function() {
     assert.response(ipserver, {
-      url: '/',
+      url: '/json',
       headers: { Accept: 'application/json' }
     }, {
       body: '{"ip":"127.0.0.1"}'
@@ -12,7 +12,7 @@ module.exports = {
   },
   'test jsonp callback': function() {
     assert.response(ipserver, {
-      url: '/?callback=test',
+      url: '/json?callback=test',
       headers: { Accept: 'application/json' }
     }, {
       body: 'test({"ip":"127.0.0.1"});'
@@ -20,18 +20,18 @@ module.exports = {
   },
   'test optional domain support': function() {
     assert.response(ipserver, {
-      url: '/?domains=1',
+      url: '/json?domains=1',
       headers: { Accept: 'application/json' }
     }, {
-      body: '{"ip":"127.0.0.1","domains":["localhost"]}'
+      body: '{"ip":"127.0.0.1","domains":[]}'
     });
   },
   'test jsonp with domains': function() {
     assert.response(ipserver, {
-      url: '/?callback=domaintest&domains=1',
+      url: '/json?callback=domaintest&domains=1',
       headers: { Accept: 'application/json' }
     }, {
-      body: 'domaintest({"ip":"127.0.0.1","domains":["localhost"]});'
+      body: 'domaintest({"ip":"127.0.0.1","domains":[]});'
     });
   },
 
