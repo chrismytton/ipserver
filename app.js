@@ -28,16 +28,28 @@ function ipInfo(req, res, next) {
   }
 }
 
-function addLinkHeader(req, res, next) {
-  res.header('Link', '<https://github.com/hecticjeff/ipserver>; rel="help"; title="Source Code on GitHub"');
-  next();
+function linkHeader(link, rel) {
+  return function(req, res, next) {
+    if (link.charAt(0) === '/') {
+      console.log(req.headers.host)
+      link = "http://" + req.headers.host + link;
+    }
+    var previous = res.header('Link');
+    if (previous) {
+      previous += ', ';
+    } else {
+      previous = '';
+    }
+    res.header('Link', previous + '<' + link + '>; rel="' + rel + '"');
+    next();
+  };
 }
 
 // Create a simple middleware stack
 var app = module.exports = express.createServer(
   ipInfo,
   express.logger(),
-  addLinkHeader
+  linkHeader('https://github.com/hecticjeff/ipserver', 'help')
 );
 
 app.configure('development', function(){
@@ -50,11 +62,15 @@ app.configure('production', function(){
 
 app.enable('jsonp callback');
 
-app.get('/', function(req, res) {
+var jsonLink = linkHeader('/json', 'alternate');
+
+app.get('/', jsonLink, function(req, res) {
   res.send(req.ipInfo.ip, {'Content-Type': 'text/plain'});
 });
 
-app.get('/json', function(req, res) {
+var plainLink = linkHeader('/', 'alternate');
+
+app.get('/json', plainLink, function(req, res) {
   res.send(req.ipInfo);
 });
 
