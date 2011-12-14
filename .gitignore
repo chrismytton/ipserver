@@ -1,3 +1,4 @@
 logs/*.log
 pids/*.pid
 node_modules
+.env
