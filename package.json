@@ -1,21 +1,15 @@
 {
-  "author": "",
+  "author": "Chris Mytton",
   "name": "jsonip",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/hecticjeff/ipserver.git"
   },
   "engines": {
-    "node": "0.4"
+    "node": "0.10"
   },
   "dependencies": {
-    "express": ""
-  },
-  "devDependencies": {
-    "expresso": ""
-  },
-  "scripts": {
-    "test": "expresso"
+    "express": "3.3.4"
   }
 }
