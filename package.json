@@ -14,9 +14,11 @@
   },
   "devDependencies": {
     "mocha": "~1.14.0",
-    "supertest": "~0.8.1"
+    "supertest": "~0.8.1",
+    "jshint": "~2.3.0"
   },
   "scripts": {
+    "pretest": "jshint app.js server.js",
     "test": "NODE_ENV=test mocha"
   }
 }
