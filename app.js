@@ -43,14 +43,15 @@ function linkHeader(link, rel) {
 // Create a simple middleware stack
 var app = module.exports = express();
 app.use(ipInfo);
-app.use(express.logger());
 app.use(linkHeader('https://github.com/hecticjeff/ipserver', 'help'));
 
 app.configure('development', function(){
+  app.use(express.logger('dev'));
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
+  app.use(express.logger());
   app.use(express.errorHandler());
 });
 
