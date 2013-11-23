@@ -41,7 +41,7 @@ function linkHeader(link, rel) {
 }
 
 // Create a simple middleware stack
-var app = module.exports = express()
+var app = module.exports = express();
 app.use(ipInfo);
 app.use(express.logger());
 app.use(linkHeader('https://github.com/hecticjeff/ipserver', 'help'));
@@ -54,7 +54,7 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-app.enable('trust proxy')
+app.enable('trust proxy');
 app.enable('jsonp callback');
 
 var jsonLink = linkHeader('/json', 'alternate');
