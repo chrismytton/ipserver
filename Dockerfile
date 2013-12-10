@@ -11,6 +11,8 @@ ADD . /src
 # Install app dependencies
 RUN cd /src; npm install
 
+ENV NODE_ENV production
 ENV PORT 8080
+
 EXPOSE  8080
 CMD ["node", "/src/app.js"]
