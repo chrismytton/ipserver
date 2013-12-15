@@ -10,6 +10,10 @@ Clone the code from GitHub and install the dependencies with npm.
     cd ipserver
     npm install
 
+You can also install a trusted build of [hecticjeff/ipserver](https://index.docker.io/u/hecticjeff/ipserver/) from the docker index. The image is built whenever this repository is updated.
+
+    docker pull hecticjeff/ipserver
+
 ## Usage
 
 To start a local server on port 3000 run `app.'s`.
@@ -21,6 +25,11 @@ If you want to specify the port to run on, use the `PORT` environment variable.
 
     PORT=5000 node app.js
     curl -i localhost:5000
+
+If you're using docker the container exposes port 80, so you can use it as follows.
+
+    docker run -d -p 3000:80 hecticjeff/ipserver
+    curl -i localhost:3000
 
 ## Deploy to heroku
 
