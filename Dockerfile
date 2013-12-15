@@ -7,12 +7,14 @@ RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.
 RUN yum install -y npm
 
 # Bundle app source
-ADD . /src
+ADD . /app
+
 # Install app dependencies
-RUN cd /src; npm install
+RUN cd /app; npm install
 
 ENV NODE_ENV production
-ENV PORT 8080
+ENV PORT 80
 
-EXPOSE  8080
-CMD ["node", "/src/app.js"]
+EXPOSE 80
+
+CMD ["node", "/app/server.js"]
