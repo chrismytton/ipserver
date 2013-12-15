@@ -22,7 +22,7 @@ You can also install a trusted build of [hecticjeff/ipserver](https://index.dock
 
 ### Source
 
-To start a local server on port 3000 run `app.'s`.
+To start a local server on port 3000 run `app.js`.
 
     node app.js
     curl -i localhost:3000
