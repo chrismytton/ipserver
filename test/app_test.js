@@ -13,7 +13,7 @@ describe("Returns the current ip address", function() {
   it("returns json", function(done) {
     request(app)
       .get('/json')
-      .expect({ip: '127.0.0.1'})
+      .expect({ip: '127.0.0.1', domains: []})
       .expect(200, done)
   });
 
